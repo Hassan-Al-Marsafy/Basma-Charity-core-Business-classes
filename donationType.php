@@ -1,89 +1,107 @@
 <?php
-include_once 'AbsManage.php';
+require_once 'AbsManage.php';
 class DonationType extends AbsManage {
-    public $type;
+    private $type;
 
     function __construct($id, $type) {
         $this->id = $id;
         $this->type = $type;
     }
 
+    // Getters and Setters
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    // File manipulation functions
     function insert() {
-        $lines = file('donationType.txt');
+        $lines = file('Files/donationType.txt');
         foreach ($lines as $line) {
             $donationType = explode(',', $line);
             if ($donationType[0] == $this->id) {
-                echo "A donation type with this ID already exists.\n";
-                return;
+                return false;
             }
         }
-        $file = fopen('donationType.txt', 'a');
+        $file = fopen('Files/donationType.txt', 'a');
         fwrite($file, "$this->id,$this->type\n");
         fclose($file);
+        return true;
     }
 
     function update($id, $newType) {
-        $lines = file('donationType.txt');
+        $lines = file('Files/donationType.txt');
         $found = false;
         foreach ($lines as $key => $line) {
             $donationType = explode(',', $line);
             if ($donationType[0] == $id) {
                 $lines[$key] = "$id,$newType\n";
-                file_put_contents('donationType.txt', implode('', $lines));
+                file_put_contents('Files/donationType.txt', implode('', $lines));
                 $found = true;
                 break;
             }
         }
-        if (!$found) {
-            echo "No donation type found with this ID.\n";
-        }
+        return $found;
     }
 
     function read($id) {
-        $lines = file('donationType.txt');
+        $lines = file('Files/donationType.txt');
         foreach ($lines as $line) {
             $donationType = explode(',', $line);
             if ($donationType[0] == $id) {
                 return $donationType;
             }
         }
-        echo "No donation type found with this ID.\n";
-        return null;
+        return false;
     }
 
     function delete($id) {
-        $lines = file('donationType.txt');
+        $lines = file('Files/donationType.txt');
         $found = false;
         foreach ($lines as $key => $line) {
             $donationType = explode(',', $line);
             if ($donationType[0] == $id) {
                 unset($lines[$key]);
-                file_put_contents('donationType.txt', implode('', $lines));
+                file_put_contents('Files/donationType.txt', implode('', $lines));
                 $found = true;
                 break;
             }
         }
-        if (!$found) {
-            echo "No donation type found with this ID.\n";
-        }
+        return $found;
     }
 }
 
-// Create a new donation type
-//$donationType = new DonationType(1, 'Money');
-//$donationType->insert(); // This will save the donation type to the text file
+// Create a new DonationType object
+//$donationType = new DonationType(1, "money");
 
-// Update the donation type's type
-//$donationType->update(1, 'Goods');
+// Call the insert function
+//$result = $donationType->insert();
+//if ($result === false) {
+//    echo "A donation type with this ID already exists."."<br>";
+//}
 
-// Read the donation type's data from the text file
-//$donationTypeData = $donationType->read(1);
+// Call the update function
+//$result = $donationType->update(1, "goods");
+//if ($result === false) {
+//    echo "No donation type found with this ID."."<br>";
+//}
 
-// Delete the donation type
-//$donationType->delete(1);
+// Call the read function
+//$result = $donationType->read(1);
+//if ($result === false) {
+//    echo "No donation type found with this ID."."<br>";
+//} else {
+//    echo "Donation Type ID: $result[0], Donation Type: $result[1] "."<br>";
+//    echo "</br>";
+//}
 
-// Try to read the donation type's data after deletion
-//$donationTypeData = $donationType->read(1);
-
+// Call the delete function
+//$result = $donationType->delete(1);
+//if ($result === false) {
+//    echo "No donation type found with this ID."."<br>";
+//}
 
 ?>
