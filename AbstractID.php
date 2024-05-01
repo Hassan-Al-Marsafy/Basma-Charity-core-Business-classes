@@ -1,7 +1,5 @@
 <?php
-require_once 'IManage.php';
-
-abstract class AbsManage implements IManage {
+abstract class AbstractID {
     protected $id;
 
     function __construct($id) {

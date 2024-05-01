@@ -1,7 +1,8 @@
 <?php
-require_once 'AbsManage.php';
+require_once 'IManage.php';
+require_once 'AbstractID.php';
 require_once 'donationDetails.php';
-class Donation extends AbsManage {
+class Donation extends AbstractID implements IManage {
     private $date;
     private $userId;
     private $accountantId;
