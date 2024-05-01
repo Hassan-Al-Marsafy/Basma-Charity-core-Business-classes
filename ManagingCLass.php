@@ -3,7 +3,7 @@ require_once 'donationType.php';
 require_once 'user.php';
 require_once 'donations.php';
 require_once 'donationDetails.php';
-
+require_once 'db_connect.php';
 class Manager {
     private $pdo;
 
@@ -106,4 +106,59 @@ class Manager {
         return $user->deleteDonation($donationId);
     }
 }
+
+// Create Manager
+$manager = new Manager($pdo);
+
+// Test DonationType functions
+echo "Testing Manager's DonationType functions...\n";
+$donationType = $manager->createDonationType(1, 'money');
+assert($manager->insertDonationType($donationType) == true);
+assert($manager->updateDonationType($donationType, 1, 'goods') == true);
+$readDonationType = $manager->readDonationType($donationType, 1);
+assert($readDonationType != false);
+echo "DonationType id: {$readDonationType['id']}, type: {$readDonationType['D_type_name']}<br>";
+
+// Test User functions
+echo "Testing Manager's User functions...\n";
+$user = $manager->createUser(1, 'Hassan', 'Admin');
+assert($manager->insertUser($user) == true);
+assert($manager->updateUser($user, 1, 'Ali', 'User') == true);
+$readUser = $manager->readUser($user, 1);
+assert($readUser != false);
+echo "User id: {$readUser['id']}, name: {$readUser['user_name']}, type: {$readUser['user_type']}<br>";
+$readAllUserDonations = $manager->readAllUserDonations($user);
+foreach ($readAllUserDonations as $donation) {
+    echo "Donation id: {$donation['id']}, date: {$donation['date']}, user id: {$donation['user_id']}, accountant id: {$donation['accountant_id']}, manager id: {$donation['manager_id']}<br>";
+}
+//assert($manager->deleteUserDonation($user, 1) == true);
+
+// Test Donation functions
+echo "Testing Manager's Donation functions...\n";
+$donation = $manager->createDonation(1, '2024-05-01', 1, 1, 1);
+assert($manager->insertDonation($donation) == true);
+assert($manager->updateDonation($donation, 1, '2024-05-02', 1, 1, 1, 1, '600$') == true);
+$readDonation = $manager->readDonation($donation, 1);
+assert($readDonation != false);
+echo "Donation id: {$readDonation['id']}, date: {$readDonation['date']}, user id: {$readDonation['user_id']}, accountant id: {$readDonation['accountant_id']}, manager id: {$readDonation['manager_id']}<br>";
+$readAllDonationsDetails = $manager->readAllDonationsDetails($donation);
+foreach ($readAllDonationsDetails as $donationDetail) {
+    echo "DonationDetails id: {$donationDetail['id']}, donation id: {$donationDetail['donation_id']}, donation type id: {$donationDetail['donationType_id']}, quantity: {$donationDetail['quantity']}\n";
+}
+// Test DonationDetails functions
+echo "Testing Manager's DonationDetails functions...\n";
+$donationDetails = $manager->createDonationDetails(1, 1, 1, '400$');
+assert($manager->insertDonationDetails($donationDetails) == true);
+assert($manager->updateDonationDetails($donationDetails, 1, 1, 1, '500$') == true);
+$readDonationDetails = $manager->readDonationDetails($donationDetails, 1);
+assert($readDonationDetails != false);
+echo "DonationDetails id: {$readDonationDetails['id']}, donation id: {$readDonationDetails['donation_id']}, donation type id: {$readDonationDetails['donationType_id']}, quantity: {$readDonationDetails['quantity']}<br>";
+
+
+assert($manager->deleteDonationDetails($donationDetails, 1) == true);
+assert($manager->deleteDonation($donation, 1) == true);
+assert($manager->deleteUser($user, 1) == true);
+assert($manager->deleteDonationType($donationType, 1) == true);
+
+echo "All tests passed.\n";
 ?>

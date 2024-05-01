@@ -82,10 +82,11 @@ class User extends AbstractID implements IManage {
         while ($row = $stmt->fetch()) {
             $donation = new Donation($row['id'], $row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id'], $this->pdo);
             array_push($this->donations, $donation); // Add the Donation object to the donations array
-            array_push($allUserDonations, $row); // Add the donation data to the allUserDonations array
+            array_push($allUserDonations, $donation); // Add the Donation object to the allUserDonations array
         }
         return $allUserDonations;
     }
+    
 
     function delete($id) {
         $sql = "DELETE FROM users WHERE id=?";
