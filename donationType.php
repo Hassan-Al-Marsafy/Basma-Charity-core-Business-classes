@@ -1,12 +1,15 @@
 <?php
 require_once 'IManage.php';
 require_once 'AbstractID.php';
+
 class DonationType extends AbstractID implements IManage {
     private $type;
+    private $pdo;
 
-    function __construct($id, $type) {
+    function __construct($id, $type, $pdo) {
         $this->id = $id;
         $this->type = $type;
+        $this->pdo = $pdo;
     }
 
     // Getters and Setters
@@ -18,91 +21,30 @@ class DonationType extends AbstractID implements IManage {
         $this->type = $type;
     }
 
-    // File manipulation functions
+    // Database manipulation functions
     function insert() {
-        $lines = file('Files/donationType.txt');
-        foreach ($lines as $line) {
-            $donationType = explode(',', $line);
-            if ($donationType[0] == $this->id) {
-                return false;
-            }
-        }
-        $file = fopen('Files/donationType.txt', 'a');
-        fwrite($file, "$this->id,$this->type\n");
-        fclose($file);
-        return true;
+        $sql = "INSERT INTO donation_types (id, D_type_name) VALUES (?, ?)";
+        $stmt= $this->pdo->prepare($sql);
+        return $stmt->execute([$this->id, $this->type]);
     }
 
     function update($id, $newType) {
-        $lines = file('Files/donationType.txt');
-        $found = false;
-        foreach ($lines as $key => $line) {
-            $donationType = explode(',', $line);
-            if ($donationType[0] == $id) {
-                $lines[$key] = "$id,$newType\n";
-                file_put_contents('Files/donationType.txt', implode('', $lines));
-                $found = true;
-                break;
-            }
-        }
-        return $found;
+        $sql = "UPDATE donation_types SET D_type_name=? WHERE id=?";
+        $stmt= $this->pdo->prepare($sql);
+        return $stmt->execute([$newType, $id]);
     }
 
     function read($id) {
-        $lines = file('Files/donationType.txt');
-        foreach ($lines as $line) {
-            $donationType = explode(',', $line);
-            if ($donationType[0] == $id) {
-                return $donationType;
-            }
-        }
-        return false;
+        $sql = "SELECT * FROM donation_types WHERE id=?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
     }
 
     function delete($id) {
-        $lines = file('Files/donationType.txt');
-        $found = false;
-        foreach ($lines as $key => $line) {
-            $donationType = explode(',', $line);
-            if ($donationType[0] == $id) {
-                unset($lines[$key]);
-                file_put_contents('Files/donationType.txt', implode('', $lines));
-                $found = true;
-                break;
-            }
-        }
-        return $found;
+        $sql = "DELETE FROM donation_types WHERE id=?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$id]);
     }
 }
-
-// Create a new DonationType object
-//$donationType = new DonationType(1, "money");
-
-// Call the insert function
-//$result = $donationType->insert();
-//if ($result === false) {
-//    echo "A donation type with this ID already exists."."<br>";
-//}
-
-// Call the update function
-//$result = $donationType->update(1, "goods");
-//if ($result === false) {
-//    echo "No donation type found with this ID."."<br>";
-//}
-
-// Call the read function
-//$result = $donationType->read(1);
-//if ($result === false) {
-//    echo "No donation type found with this ID."."<br>";
-//} else {
-//    echo "Donation Type ID: $result[0], Donation Type: $result[1] "."<br>";
-//    echo "</br>";
-//}
-
-// Call the delete function
-//$result = $donationType->delete(1);
-//if ($result === false) {
-//    echo "No donation type found with this ID."."<br>";
-//}
-
 ?>
