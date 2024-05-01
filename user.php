@@ -10,7 +10,6 @@ class User extends AbsManage {
         $this->id = $id;
         $this->name = $name;
         $this->type = $type;
-        $this->insert(); // Automatically insert the new User object into the text file
     }
 
     // Getters and Setters
@@ -98,17 +97,19 @@ class User extends AbsManage {
     }
 
     function readAllDonations() {
-        $allDonations = array();
-        foreach ($this->donations as $donation) {
-            if ($donation->getUserId() == $this->id) {
-                $donationData = $donation->read($donation->getId());
-                if ($donationData !== false) {
-                    array_push($allDonations, $donationData);
-                }
+        $allUserDonations = array();
+        $lines = file('Files/donation.txt');
+        foreach ($lines as $line) {
+            $donationData = explode(',', $line);
+            if ($donationData[2] == $this->id) { // If the userId in the file matches this user's id
+                $donation = new Donation($donationData[0], $donationData[1], $donationData[2], $donationData[3], $donationData[4]);
+                array_push($this->donations, $donation); // Add the Donation object to the donations array
+                array_push($allUserDonations, $donationData); // Add the donation data to the allUserDonations array
             }
         }
-        return $allDonations;
+        return $allUserDonations;
     }
+    
     
 
     function delete($id) {
@@ -141,7 +142,7 @@ class User extends AbsManage {
 
 // Create a new User object
 //$user = new User(1, "Hassan", "donor");
-
+//$user->insert();
 // Call the addDonation function
 //$user->addDonation(1, "1/1/1", 1, 2, 2);
 //$user->addDonation(2, "1/1/2", 1, 3, 3);

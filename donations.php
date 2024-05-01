@@ -14,7 +14,6 @@ class Donation extends AbsManage {
         $this->userId = $userId;
         $this->accountantId = $accountantId;
         $this->managerId = $managerId;
-        $this->insert(); // Automatically insert the new Donation object into the text file
     }
 
     // Getters and Setters
@@ -110,16 +109,18 @@ class Donation extends AbsManage {
 
     function readAllDonationDetails() {
         $allDonationDetails = array();
-        foreach ($this->donationDetails as $donationDetail) {
-            if ($donationDetail->getDonationId() == $this->id) {
-                $donationDetailData = $donationDetail->read($donationDetail->getId());
-                if ($donationDetailData !== false) {
-                    array_push($allDonationDetails, $donationDetailData);
-                }
+        $lines = file('Files/donationDetails.txt');
+        foreach ($lines as $line) {
+            $donationDetailData = explode(',', $line);
+            if ($donationDetailData[1] == $this->id) { // If the donationId in the file matches this donation's id
+                $donationDetail = new DonationDetails($donationDetailData[0], $donationDetailData[1], $donationDetailData[2], $donationDetailData[3]);
+                array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
+                array_push($allDonationDetails, $donationDetailData); // Add the donation detail data to the allDonationDetails array
             }
         }
         return $allDonationDetails;
     }
+    
     
 
     function delete($id) {
@@ -152,6 +153,7 @@ class Donation extends AbsManage {
 
 // Create a new Donation object
 //$donation = new Donation(1, "1/1/2001", 1, 1, 1);
+//$donation->insert();
 
 // Call the addDonationDetail function
 //$donation->addDonationDetail(1, 1, 1);
@@ -186,7 +188,7 @@ class Donation extends AbsManage {
 //$allDonationDetails = $donation->readAllDonationDetails();
 //foreach ($allDonationDetails as $donationDetail) {
 //    echo "Donation Detail ID: $donationDetail[0], Donation ID: $donationDetail[1], Donation Type ID: $donationDetail[2], Quantity: $donationDetail[3]\n";
-//    echo "</br>";
+//   echo "</br>";
 //}
 
 
