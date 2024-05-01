@@ -50,6 +50,7 @@ class User extends AbstractID implements IManage {
     }
     function addDonation($donationId, $date, $userId, $accountantId, $managerId) {
         $donation = new Donation($donationId, $date, $userId, $accountantId, $managerId);
+        $donation->insert();
         array_push($this->donations, $donation);
     }
     
