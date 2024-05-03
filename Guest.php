@@ -1,9 +1,11 @@
 <?php
 require_once 'User.php';
 require_once 'ManagingClass.php';
+
 class Guest extends User {
     private $manager;
     private $pdo;
+
     function __construct($id, $name, $pdo, $manager) {
         parent::__construct($id, $name, 'guest', $pdo);
         $this->manager = $manager;
@@ -22,10 +24,11 @@ class Guest extends User {
         return $stmt->execute([$this->getId(), $password]);
     }
 
-    function makeDonation($id, $date, $userId, $accountantId, $managerId){
-        $this->manager->createDonation($id, $date, $userId, $accountantId, $managerId);
-        $this->manager->insertDonation();
+    function makeDonation($id, $date, $accountantId, $managerId){
+        $donation = $this->manager->createDonation($id, $date, $this->getId(), $accountantId, $managerId);
+        $this->manager->insertDonation($donation);
     }
+    
 
     function readDonations() {
         $donations = $this->manager->readAllUserDonations($this);
@@ -44,6 +47,21 @@ class Guest extends User {
         }
     }
 
-    // You can add more methods here...
+    function cancelDonation($donationId) {
+        // Get all donations of the user
+        $donations = $this->manager->readAllUserDonations($this);
+
+        // Find the donation with the same user id and donation id
+        foreach ($donations as $donation) {
+            if ($donation->getId() == $donationId && $donation->getUserId() == $this->getId()) {
+                // Delete the donation
+                return $this->manager->deleteDonation($donation, $donationId);
+            }
+        }
+
+        // If no matching donation is found, return false
+        return false;
+    }
 }
+
 ?>
