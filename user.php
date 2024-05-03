@@ -9,8 +9,7 @@ class User extends AbstractID implements IManage {
     private $pdo;
     private $donations = array(); // Array to hold Donation objects
 
-    function __construct($id, $name, $type, $pdo) {
-        $this->id = $id;
+    function __construct($name, $type, $pdo) {
         $this->name = $name;
         $this->type = $type;
         $this->pdo = $pdo;
@@ -39,13 +38,13 @@ class User extends AbstractID implements IManage {
 
     // Database manipulation functions
     function insert() {
-        $sql = "INSERT INTO users (id, user_name, user_type) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (user_name, user_type) VALUES (?, ?)";
         $stmt= $this->pdo->prepare($sql);
-        return $stmt->execute([$this->id, $this->name, $this->type]);
+        return $stmt->execute([$this->name, $this->type]);
     }
 
     function addDonation($donationId, $date, $userId, $accountantId, $managerId) {
-        $donation = new Donation($donationId, $date, $userId, $accountantId, $managerId, $this->pdo);
+        $donation = new Donation($date, $userId, $accountantId, $managerId, $this->pdo);
         $donation->insert();
         array_push($this->donations, $donation);
     }
@@ -80,7 +79,7 @@ class User extends AbstractID implements IManage {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$this->id]);
         while ($row = $stmt->fetch()) {
-            $donation = new Donation($row['id'], $row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id'], $this->pdo);
+            $donation = new Donation($row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id'], $this->pdo);
             array_push($this->donations, $donation); // Add the Donation object to the donations array
             array_push($allUserDonations, $donation); // Add the Donation object to the allUserDonations array
         }

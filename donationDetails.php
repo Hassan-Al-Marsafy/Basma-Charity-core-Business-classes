@@ -8,8 +8,7 @@ class DonationDetails extends AbstractID implements IManage {
     private $quantity;
     private $pdo;
 
-    function __construct($id, $donationId, $donationTypeId, $quantity, $pdo) {
-        $this->id = $id;
+    function __construct($donationId, $donationTypeId, $quantity, $pdo) {
         $this->donationId = $donationId;
         $this->donationTypeId = $donationTypeId;
         $this->quantity = $quantity;
@@ -43,9 +42,9 @@ class DonationDetails extends AbstractID implements IManage {
 
     // Database manipulation functions
     function insert() {
-        $sql = "INSERT INTO donation_details (id, donation_id, donationType_id, quantity) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO donation_details (donation_id, donationType_id, quantity) VALUES (?, ?, ?)";
         $stmt= $this->pdo->prepare($sql);
-        return $stmt->execute([$this->id, $this->donationId, $this->donationTypeId, $this->quantity]);
+        return $stmt->execute([$this->donationId, $this->donationTypeId, $this->quantity]);
     }
 
     function update($id, $newDonationId, $newDonationTypeId, $newQuantity) {

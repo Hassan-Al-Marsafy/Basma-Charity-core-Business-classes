@@ -6,8 +6,7 @@ class DonationType extends AbstractID implements IManage {
     private $type;
     private $pdo;
 
-    function __construct($id, $type, $pdo) {
-        $this->id = $id;
+    function __construct($type, $pdo) {
         $this->type = $type;
         $this->pdo = $pdo;
     }
@@ -23,9 +22,9 @@ class DonationType extends AbstractID implements IManage {
 
     // Database manipulation functions
     function insert() {
-        $sql = "INSERT INTO donation_types (id, D_type_name) VALUES (?, ?)";
+        $sql = "INSERT INTO donation_types (D_type_name) VALUES (?)";
         $stmt= $this->pdo->prepare($sql);
-        return $stmt->execute([$this->id, $this->type]);
+        return $stmt->execute([$this->type]);
     }
 
     function update($id, $newType) {

@@ -11,8 +11,7 @@ class Donation extends AbstractID implements IManage {
     private $pdo;
     private $donationDetails = array(); // Array to hold DonationDetails objects
 
-    function __construct($id, $date, $userId, $accountantId, $managerId, $pdo) {
-        $this->id = $id;
+    function __construct($date, $userId, $accountantId, $managerId, $pdo) {
         $this->date = $date;
         $this->userId = $userId;
         $this->accountantId = $accountantId;
@@ -59,15 +58,15 @@ class Donation extends AbstractID implements IManage {
 
     // Database manipulation functions
     function addDonationDetail($donationDetailId, $donationTypeId, $quantity) {
-        $donationDetail = new DonationDetails($donationDetailId, $this->id, $donationTypeId, $quantity, $this->pdo);
+        $donationDetail = new DonationDetails($this->id, $donationTypeId, $quantity, $this->pdo);
         $donationDetail->insert();
         array_push($this->donationDetails, $donationDetail);
     }
 
     function insert() {
-        $sql = "INSERT INTO donations (id, date, user_id, accountant_id, manager_id) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO donations (date, user_id, accountant_id, manager_id) VALUES (?, ?, ?, ?)";
         $stmt= $this->pdo->prepare($sql);
-        return $stmt->execute([$this->id, $this->date, $this->userId, $this->accountantId, $this->managerId]);
+        return $stmt->execute([$this->date, $this->userId, $this->accountantId, $this->managerId]);
     }
 
     function update($id, $newDate, $newUserId, $newAccountantId, $newManagerId, $newDonationTypeId, $newQuantity) {
@@ -98,7 +97,7 @@ class Donation extends AbstractID implements IManage {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$this->id]);
         while ($row = $stmt->fetch()) {
-            $donationDetail = new DonationDetails($row['id'], $row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
+            $donationDetail = new DonationDetails($row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
             array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
             array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
         }
