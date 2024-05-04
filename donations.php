@@ -1,9 +1,9 @@
 <?php
-require_once 'IManage.php';
+require_once 'CRUDinterface.php';
 require_once 'AbstractID.php';
 require_once 'donationDetails.php';
 
-class Donation extends AbstractID implements IManage {
+class Donation extends AbstractID implements CRUDinterface {
     private $date;
     private $userId;
     private $accountantId;

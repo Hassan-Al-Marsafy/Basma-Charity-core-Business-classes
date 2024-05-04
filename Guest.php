@@ -1,8 +1,10 @@
 <?php
 require_once 'User.php';
 require_once 'ManagingClass.php';
+require_once 'DonationInterface.php';
+require_once 'RestrictionInterface.php';
 
-class Guest extends User {
+class Guest extends User implements DonationInterface,RestrictionInterface {
     private $manager;
     private $pdo;
 
@@ -50,44 +52,45 @@ class Guest extends User {
         }
     }
 
-//    function cancelDonation($donationId) {
-//        // Get all donations of the user
-//        $donations = $this->manager->readAllUserDonations($this);
-//
-//        // Find the donation with the same user id and donation id
-//        foreach ($donations as $donation) {
-//            if ($donation->getId() == $donationId && $donation->getUserId() == $this->getId()) {
-//                // Delete the donation
-//                return $this->manager->deleteDonation($donation, $donationId);
-//            }
-//        }
-//
-//        // If no matching donation is found, return false
-//        return false;
-//    }
+    function cancelDonation($donationId) {
+        // Get all donations of the user
+        $donations = $this->manager->readAllUserDonations($this);
+
+        // Find the donation with the same user id and donation id
+        foreach ($donations as $donation) {
+            if ($donation->getId() == $donationId && $donation->getUserId() == $this->getId()) {
+                // Delete the donation
+                return $this->manager->deleteDonation($donation, $donationId);
+            }
+        }
+
+        // If no matching donation is found, return false
+        return false;
+    }
+    function RestrictUserPersonalInfoAccess($userType){}
 }
 
 // Create Manager
-$manager = new Manager($pdo);
+//$manager = new Manager($pdo);
 
 // Test Guest functions
-echo "Testing Guest functions...<br>";
+//echo "Testing Guest functions...<br>";
 
 // Create a new guest
-$guest = new Guest('John Doe', $pdo, $manager);
+//$guest = new Guest('John Doe', $pdo, $manager);
 
 // Sign up the guest
-assert($guest->signUp('password123') == true);
+//assert($guest->signUp('password123') == true);
 
-$guest->makeDonation('2024-05-01', 1, 1);
+//$guest->makeDonation('2024-05-01', 1, 1);
 
 // Read donations
-$guest->readDonations();
+//$guest->readDonations();
 
 // Read donation details
 //$guest->readDonationDetails();
 
 //$guest->cancelDonation(11);
 
-echo "All tests passed.<br>";
+//echo "All tests passed.<br>";
 ?>
