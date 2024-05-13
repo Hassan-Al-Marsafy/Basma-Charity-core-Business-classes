@@ -2,10 +2,12 @@
 require_once ("CRUDinterface.php");
 require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\AbstractID.php");
 require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\model\db_connect.php");
+require_once ("CRUDdonation.php");
 class CRUDuser implements CRUDinterface{
     private $name;
     private $type;
     private $pdo;
+    private $donations = array();
 
     function __construct($name, $type, $pdo) {
         $this->name = $name;
@@ -30,6 +32,9 @@ class CRUDuser implements CRUDinterface{
         $this->type = $type;
     }
 
+    public function getDonations() {
+        return $this->donations;
+    }
 
     // Database manipulation functions
     function insert() {
@@ -65,6 +70,11 @@ class CRUDuser implements CRUDinterface{
             return false;
         }
         return true;
+    }
+    function addDonation($donationId, $date, $userId, $accountantId, $managerId) {
+        $donation = new CRUDdonation($date, $userId, $accountantId, $managerId, $this->pdo);
+        $donation->insert();
+        array_push($this->donations, $donation);
     }
 }
 
