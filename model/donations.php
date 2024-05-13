@@ -1,24 +1,14 @@
 <?php
-require_once 'CRUDinterface.php';
-require_once 'AbstractID.php';
-require_once 'donationDetails.php';
-
-class Donation extends AbstractID{
+class Donation {
     private $don;
-    private $donationDetails = array(); // Array to hold DonationDetails objects
-
-    public function getDonType(){
+    public function getDonation(){
         return $this->don;
     }
 
-    public function setDonType($don){
+    public function setDonation($don){
         $this->don = $don;
         return $this;
     }
-    public function getDonationDetails() {
-        return $this->donationDetails;
-    }
-
     // Database manipulation functions
     function addDonationDetail($donationDetailId, $donationTypeId, $quantity) {
         $this->don->addDetail();

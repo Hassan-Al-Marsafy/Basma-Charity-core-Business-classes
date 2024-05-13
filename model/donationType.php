@@ -1,5 +1,5 @@
 <?php
-class DonationType extends AbstractID{
+class DonationType {
     private $donType;
 
     public function getDonType(){

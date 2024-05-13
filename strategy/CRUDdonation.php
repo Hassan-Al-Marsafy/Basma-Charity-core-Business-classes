@@ -1,6 +1,8 @@
 <?php
 require_once ("CRUDinterface.php");
 require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\AbstractID.php");
+require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\model\db_connect.php");
+require_once ("CRUDdonDetails.php");
 class CRUDdonation extends AbstractID implements CRUDinterface{
     private $date;
     private $userId;
@@ -48,6 +50,10 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
     public function setManagerId($managerId) {
         $this->managerId = $managerId;
     }
+    public function getDonationDetails() {
+        return $this->donationDetails;
+    }
+
 
     function insert() {
         $sql = "INSERT INTO donations (date, user_id, accountant_id, manager_id) VALUES (?, ?, ?, ?)";
@@ -86,14 +92,14 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$this->id]);
         while ($row = $stmt->fetch()) {
-            $donationDetail = new DonationDetails($row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
+            $donationDetail = new CRUDdonDetails($row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
             array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
             array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
         }
         return $allDonationDetails;
     }
     function addDetail($donationDetailId, $donationTypeId, $quantity) {
-        $donationDetail = new DonationDetails($this->id, $donationTypeId, $quantity, $this->pdo);
+        $donationDetail = new CRUDdonDetails($this->id, $donationTypeId, $quantity, $this->pdo);
         $donationDetail->insert();
         array_push($this->donationDetails, $donationDetail);
     }

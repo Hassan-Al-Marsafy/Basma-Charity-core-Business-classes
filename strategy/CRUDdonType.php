@@ -1,5 +1,7 @@
 <?php
 require_once ("CRUDinterface.php");
+require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\AbstractID.php");
+require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\model\db_connect.php");
 
 class CRUDdonType implements CRUDinterface{
     private $type;
