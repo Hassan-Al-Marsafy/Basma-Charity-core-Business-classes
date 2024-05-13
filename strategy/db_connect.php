@@ -1,5 +1,6 @@
 <?php
 
+$x = 0;
 $host = '127.0.0.1';
 $db   = 'basma';
 $user = 'root';
