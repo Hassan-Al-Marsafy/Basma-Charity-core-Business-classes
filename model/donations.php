@@ -1,4 +1,6 @@
 <?php
+require_once ("db_connect.php");
+require_once ("C:\\xampp\htdocs\\BasmaGit\\Basma-Charity-core-Business-classes\\strategy\\CRUDdonation.php");
 class Donation {
     private $don;
     public function getDonation(){

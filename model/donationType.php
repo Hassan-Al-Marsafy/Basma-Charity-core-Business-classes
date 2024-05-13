@@ -1,4 +1,6 @@
 <?php
+require_once ("db_connect.php");
+require_once ("C:\\xampp\htdocs\\BasmaGit\\Basma-Charity-core-Business-classes\\strategy\\CRUDdonType.php");
 class DonationType {
     private $donType;
 
@@ -21,13 +23,20 @@ class DonationType {
     }
 
     function readDonType($id) {
-        $this->donType->read($id);
+        return $this->donType->read($id);
     }
 
     function deleteDonType($id) {
         $this->donType->delete($id);
     }
 }
+
+
+$test=new DonationType();
+$test->setDonType(new CRUDdonType("goods",$pdo));
+$testing=$test->readDonType(13);
+
+echo $testing
 
 
 ?>
