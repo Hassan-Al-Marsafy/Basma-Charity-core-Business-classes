@@ -37,6 +37,7 @@ CREATE TABLE `donations` (
 
 -- --------------------------------------------------------
 
+
 --
 -- Table structure for table `donation_details`
 --
