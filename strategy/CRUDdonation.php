@@ -1,12 +1,13 @@
 <?php
 require_once ("CRUDinterface.php");
-class CRUDdonation implements CRUDinterface{
+require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\AbstractID.php");
+class CRUDdonation extends AbstractID implements CRUDinterface{
     private $date;
     private $userId;
     private $accountantId;
     private $managerId;
     private $pdo;
-
+    private $donationDetails = array();
     function __construct($date, $userId, $accountantId, $managerId, $pdo) {
         $this->date = $date;
         $this->userId = $userId;
@@ -54,7 +55,7 @@ class CRUDdonation implements CRUDinterface{
         return $stmt->execute([$this->date, $this->userId, $this->accountantId, $this->managerId]);
     }
 
-    function update($id, $newDate, $newUserId, $newAccountantId, $newManagerId, $newDonationTypeId, $newQuantity) {
+    function update($id, $newDate, $newUserId, $newAccountantId, $newManagerId) {
         $sql = "UPDATE donations SET date=?, user_id=?, accountant_id=?, manager_id=? WHERE id=?";
         $stmt= $this->pdo->prepare($sql);
         $result = $stmt->execute([$newDate, $newUserId, $newAccountantId, $newManagerId, $id]);
@@ -78,6 +79,23 @@ class CRUDdonation implements CRUDinterface{
             return false;
         }
         return true;
+    }
+    function readAllDetails() {
+        $allDonationDetails = array();
+        $sql = "SELECT * FROM donation_details WHERE donation_id=?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$this->id]);
+        while ($row = $stmt->fetch()) {
+            $donationDetail = new DonationDetails($row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
+            array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
+            array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
+        }
+        return $allDonationDetails;
+    }
+    function addDetail($donationDetailId, $donationTypeId, $quantity) {
+        $donationDetail = new DonationDetails($this->id, $donationTypeId, $quantity, $this->pdo);
+        $donationDetail->insert();
+        array_push($this->donationDetails, $donationDetail);
     }
 }
 
