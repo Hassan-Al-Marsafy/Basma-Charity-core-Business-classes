@@ -3,7 +3,7 @@ require_once ("CRUDinterface.php");
 require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\AbstractID.php");
 require_once ("C:\xampp\htdocs\BasmaGit\Basma-Charity-core-Business-classes\model\db_connect.php");
 require_once ("CRUDdonation.php");
-class CRUDuser implements CRUDinterface{
+class CRUDuser extends AbstractID implements CRUDinterface{
     private $name;
     private $type;
     private $pdo;
@@ -75,6 +75,18 @@ class CRUDuser implements CRUDinterface{
         $donation = new CRUDdonation($date, $userId, $accountantId, $managerId, $this->pdo);
         $donation->insert();
         array_push($this->donations, $donation);
+    }
+    function readDonations() {
+        $allUserDonations = array();
+        $sql = "SELECT * FROM donations WHERE user_id=?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$this->id]);
+        while ($row = $stmt->fetch()) {
+            $donation = new CRUDdonation($row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id'], $this->pdo);
+            array_push($this->donations, $donation); // Add the Donation object to the donations array
+            array_push($allUserDonations, $donation); // Add the Donation object to the allUserDonations array
+        }
+        return $allUserDonations;
     }
 }
 
