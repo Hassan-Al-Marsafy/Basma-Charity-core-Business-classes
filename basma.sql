@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 10:34 PM
+-- Generation Time: May 14, 2024 at 05:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -94,15 +94,19 @@ INSERT INTO `login_info` (`id`, `password`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `user_type` varchar(50) NOT NULL
+  `user_type` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_name`, `user_type`) VALUES
-(23, 'John Doe', 'RegisteredUser');
+INSERT INTO `users` (`id`, `user_name`, `user_type`, `name`) VALUES
+(23, 'John Doe', 'RegisteredUser', ''),
+(33, 'Mizo', 'Tmm', ''),
+(34, 'Aley', 'Registered', ''),
+(35, 'Mazen', 'Tmm', '');
 
 --
 -- Indexes for dumped tables
@@ -139,7 +143,8 @@ ALTER TABLE `login_info`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -167,7 +172,7 @@ ALTER TABLE `donation_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
