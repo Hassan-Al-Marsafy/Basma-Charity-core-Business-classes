@@ -15,7 +15,7 @@ class DonationDetails {
     }
 
     function update($id, $newDonationId, $newDonationTypeId, $newQuantity) {
-        $this->donDetail->update($id, $newDonationId, $newDonationTypeId, $newQuantity);
+       return $this->donDetail->update($id, $newDonationId, $newDonationTypeId, $newQuantity);
     }
 
     function read($id) {
