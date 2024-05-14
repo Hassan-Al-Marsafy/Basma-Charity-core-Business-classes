@@ -10,8 +10,8 @@ class DonationDetails {
         return $this;
     }
     // Database manipulation functions
-    function insert() {
-        $this->donDetail->insert();
+    function insertDonDetail() {
+        return $this->donDetail->insert();
     }
 
     function update($id, $newDonationId, $newDonationTypeId, $newQuantity) {
