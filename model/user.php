@@ -12,7 +12,6 @@ class User{
     // Database manipulation functions
     function insertUser() {
         $this->usr->insert();
-
         }
 
     function createDonation($donationId, $date, $userId, $accountantId, $managerId) {

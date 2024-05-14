@@ -1,7 +1,7 @@
 <?php
 require_once ("CRUDinterface.php");
-require_once ("C:\\xampp\htdocs\\BasmaGit\\Basma-Charity-core-Business-classes\\AbstractID.php");
-require_once ("C:\\xampp\htdocs\\BasmaGit\\Basma-Charity-core-Business-classes\\model\db_connect.php");
+require_once ("../AbstractID.php");
+require_once ("../model/db_connect.php");
 require_once ("CRUDdonDetails.php");
 class CRUDdonation extends AbstractID implements CRUDinterface{
     private $date;
