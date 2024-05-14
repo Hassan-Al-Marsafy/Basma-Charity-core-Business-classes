@@ -21,8 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($user_name_err) && empty($user_type_err)) {
         require_once '../strategy/CRUDuser.php';
-        $createUser = new CRUDuser($user_name , $user_type , $pdo);
-        if ($createUser->insert()) {
+        require_once '../model/user.php';
+        $User = new CRUDuser($user_name , $user_type , $pdo);
+        $createUser = new User();
+        $usr = $createUser->setUser($User);
+        if ($usr->insertUser()) {
             header("location: ../index.php");
         } else {
             echo "Something went wrong. Please try again later.";

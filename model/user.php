@@ -11,8 +11,9 @@ class User{
     }
     // Database manipulation functions
     function insertUser() {
-        $this->usr->insert();
-        }
+        $res = $this->usr->insert();
+        return $res;
+    }
 
     function createDonation($donationId, $date, $userId, $accountantId, $managerId) {
         $this->usr->addDonation($donationId, $date, $userId, $accountantId, $managerId);

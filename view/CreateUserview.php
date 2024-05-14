@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h2>Create Task</h2>
+                        <h2>Create User</h2>
                     </div>
                     <p>Please fill this form and submit to add user to the database.</p>
                     <form action="../controller/CreateUserController.php" method="post">

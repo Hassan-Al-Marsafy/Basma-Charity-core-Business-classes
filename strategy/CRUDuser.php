@@ -41,6 +41,7 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         $sql = "INSERT INTO users (user_name, user_type) VALUES (?, ?)";
         $stmt= $this->pdo->prepare($sql);
         return $stmt->execute([$this->name, $this->type]);
+        
     }
 
 
