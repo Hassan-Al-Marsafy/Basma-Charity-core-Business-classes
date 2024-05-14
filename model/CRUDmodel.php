@@ -5,7 +5,7 @@ require_once ("..\\strategy\\CRUDdonDetails.php");
 require_once ("..\\strategy\\CRUDdonType.php");
 require_once ("..\\strategy\\CRUDdonation.php");
 
-class DonationDetails {
+class CRUDmodel {
     private $operation;
     public function getOperation(){
         return $this->operation;
@@ -17,7 +17,8 @@ class DonationDetails {
     }
     
     function insertOperation() {
-        $this->operation->insert();
+        $x = $this->operation->insert();
+        return $x;
     }
 
     function updateDonDetail($id, $newDonationId, $newDonationTypeId, $newQuantity) {

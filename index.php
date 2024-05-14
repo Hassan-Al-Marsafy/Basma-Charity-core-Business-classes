@@ -49,7 +49,7 @@
                     <div class="page-header">
                         <h2>Home Page</h2>
                     </div>
-                    <button class="btn btn-primary" onclick="window.location.href='view/CreateUserview.php'">User</button>
+                    <button class="btn btn-primary" onclick="window.location.href='view/ChooseUserCRUD.php'">User</button>
                     <button class="btn btn-success" onclick="window.location.href='view/CreateDonationview.php'">Donation</button>
                 </div>
             </div>

@@ -1,13 +1,20 @@
 <?php
 
-$id = $user_name = $user_type = "";
-$id_err = $user_name_err = $user_type_err = "";
+$name = $user_name = $user_type = "";
+$name_err = $user_name_err = $user_type_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $input_user_name = trim($_POST["name"]);
+    $input_name = trim($_POST["name"]);
+    if (empty($input_name)) {
+        $name_err = "Please enter a name.";
+    } else {
+        $name = $input_name;
+    }
+
+    $input_user_name = trim($_POST["username"]);
     if (empty($input_user_name)) {
-        $user_name_err = "Please enter an user_name.";
+        $user_name_err = "Please enter a user_name.";
     } else {
         $user_name = $input_user_name;
     }
@@ -19,16 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_type = $input_user_type;
     }
 
-    if (empty($user_name_err) && empty($user_type_err)) {
+    if (empty($name_err) && empty($user_name_err) && empty($user_type_err)) {
+        require_once '../model/CRUDmodel.php';
+        require_once '../model/db_connect.php';
         require_once '../strategy/CRUDuser.php';
-        require_once '../model/user.php';
-        $User = new CRUDuser($user_name , $user_type , $pdo);
-        $createUser = new User();
-        $usr = $createUser->setUser($User);
-        if ($usr->insertUser()) {
+        $User = new CRUDmodel();
+        $User->setOperation(new CRUDuser($user_name, $user_type, $name, $pdo));
+        if ($User->insertOperation()) {
             header("location: ../index.php");
         } else {
-            echo "Something went wrong. Please try again later.";
+            $user_name_err = "username already exists.";
+            header("location: ../view/CreateUserview.php");
         }
     }
 }

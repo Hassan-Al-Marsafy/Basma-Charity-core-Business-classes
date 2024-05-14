@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php require_once '../controller/CreateUserController.php'; ?>
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
@@ -26,6 +26,11 @@
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" name="name" class="form-control" maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" maxlength="50" required>
+                            
                         </div>
                         <div class="form-group">
                             <label>Type</label>
