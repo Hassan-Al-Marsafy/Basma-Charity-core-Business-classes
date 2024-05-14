@@ -4,24 +4,26 @@ require_once ("../AbstractID.php");
 require_once ("../model/db_connect.php");
 require_once ("CRUDdonation.php");
 class CRUDuser extends AbstractID implements CRUDinterface{
-    private $name;
+    private $Username;
     private $type;
+    private $name;
     private $pdo;
     private $donations = array();
 
-    function __construct($name, $type, $pdo) {
-        $this->name = $name;
+    function __construct($Username, $type, $name,$pdo) {
+        $this->Username = $Username;
         $this->type = $type;
+        $this->name=$name;
         $this->pdo = $pdo;
     }
 
     // Getters and Setters
-    public function getName() {
-        return $this->name;
+    public function getUserName() {
+        return $this->Username;
     }
 
-    public function setName($name) {
-        $this->name = $name;
+    public function setUserName($Username) {
+        $this->Username = $Username;
     }
 
     public function getType() {
@@ -31,6 +33,13 @@ class CRUDuser extends AbstractID implements CRUDinterface{
     public function setType($type) {
         $this->type = $type;
     }
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
 
     public function getDonations() {
         return $this->donations;
@@ -38,9 +47,9 @@ class CRUDuser extends AbstractID implements CRUDinterface{
 
     // Database manipulation functions
     function insert() {
-        $sql = "INSERT INTO users (user_name, user_type) VALUES (?, ?)";
+        $sql = "INSERT INTO users (user_name, user_type, name) VALUES (?, ?)";
         $stmt= $this->pdo->prepare($sql);
-        return $stmt->execute([$this->name, $this->type]);
+        return $stmt->execute([$this->Username, $this->type,$this->name]);
         
     }
 
