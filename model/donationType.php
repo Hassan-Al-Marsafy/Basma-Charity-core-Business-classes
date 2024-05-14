@@ -12,7 +12,7 @@ class DonationType {
     }
 
     function insertDonType() {
-        $this->donType->insert();
+        return $this->donType->insert();
     }
 
     function updateDonType($id, $newType) {

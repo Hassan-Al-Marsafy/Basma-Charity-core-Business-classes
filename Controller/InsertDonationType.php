@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $donationType->setDonType($crudDonType);
 
         if ($donationType->insertDonType()){
-            header("location: /index.php");
+            header("location: ../home.php");
         } else {
             echo "Something went wromg. Please try again.";
         }
