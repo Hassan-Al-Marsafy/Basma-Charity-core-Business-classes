@@ -16,12 +16,12 @@ class DonationType {
     }
 
     function updateDonType($id, $newType) {
-        $this->donType->update($id,$newType);
+        return $this->donType->update($id, $newType);
 
     }
 
     function readDonType($id) {
-        $this->donType->read($id);
+        return $this->donType->read($id);
     }
 
     function deleteDonType($id) {
