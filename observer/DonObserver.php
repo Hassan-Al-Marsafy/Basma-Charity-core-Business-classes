@@ -7,11 +7,10 @@ class DonObserver extends Observer{
     public function update() {
         $donation = $this->D->getOperation();
         if ($donation instanceof CRUDdonation) {
-            echo 'Donation made ';
-            echo "date: {$donation->getDate()}, user id: {$donation->getUserId()}, accountant id: {$donation->getAccountantId()}, manager id: {$donation->getManagerId()}<br>";
-            echo "<hr>";
+            $_SESSION['message'] = 'Donation made. Date: ' . $donation->getDate() . ', User ID: ' . $donation->getUserId() . ', Accountant ID: ' . $donation->getAccountantId() . ', Manager ID: ' . $donation->getManagerId();
         }
     }
+    
     
 }
 
