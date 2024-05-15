@@ -17,7 +17,7 @@ if (!empty($result)) {
     echo "<th>Username</th>";
     echo "<th>Type</th>";
     echo "<th>Name</th>";
-    echo "<th></th>";
+    echo "<th>Action</th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
