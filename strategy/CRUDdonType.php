@@ -7,9 +7,9 @@ class CRUDdonType implements CRUDinterface{
     private $type;
     private $pdo;
 
-    function __construct($type, $pdo) {
+    function __construct($type) {
         $this->type = $type;
-        $this->pdo = $pdo;
+        $this->pdo = Database::getInstance()->getConnection(); // Get the Singleton database connection
     }
 
     // Getters and Setters

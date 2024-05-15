@@ -3,6 +3,9 @@ require_once ("CRUDinterface.php");
 require_once ("../AbstractID.php");
 require_once ("../model/db_connect.php");
 require_once ("CRUDdonDetails.php");
+require_once ("../observer/Observer.php");
+require_once ("../observer/DonObserver.php");
+
 class CRUDdonation extends AbstractID implements CRUDinterface{
     private $date;
     private $userId;
@@ -10,12 +13,13 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
     private $managerId;
     private $pdo;
     private $donationDetails = array();
-    function __construct($date, $userId, $accountantId, $managerId, $pdo) {
+    function __construct($date, $userId, $accountantId, $managerId) {
         $this->date = $date;
         $this->userId = $userId;
         $this->accountantId = $accountantId;
         $this->managerId = $managerId;
-        $this->pdo = $pdo;
+        $this->pdo = Database::getInstance()->getConnection(); // Get the Singleton database connection
+
     }
 
     // Getters and Setters
@@ -100,17 +104,18 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$this->id]);
         while ($row = $stmt->fetch()) {
-            $donationDetail = new CRUDdonDetails($row['donation_id'], $row['donationType_id'], $row['quantity'], $this->pdo);
+            $donationDetail = new CRUDdonDetails($row['donation_id'], $row['donationType_id'], $row['quantity']);
             array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
             array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
         }
         return $allDonationDetails;
     }
     function addDetail($donationDetailId, $donationTypeId, $quantity) {
-        $donationDetail = new CRUDdonDetails($this->id, $donationTypeId, $quantity, $this->pdo);
+        $donationDetail = new CRUDdonDetails($this->id, $donationTypeId, $quantity);
         $donationDetail->insert();
         array_push($this->donationDetails, $donationDetail);
     }
+
 }
 
 

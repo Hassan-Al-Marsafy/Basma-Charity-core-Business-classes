@@ -10,11 +10,11 @@ class CRUDuser extends AbstractID implements CRUDinterface{
     private $pdo;
     private $donations = array();
 
-    function __construct($Username, $type, $name,$pdo) {
+    function __construct($Username, $type, $name) {
         $this->Username = $Username;
         $this->type = $type;
         $this->name=$name;
-        $this->pdo = $pdo;
+        $this->pdo = Database::getInstance()->getConnection(); // Get the Singleton database connection
     }
 
     // Getters and Setters
@@ -88,7 +88,7 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         return true;
     }
     function addDonation($donationId, $date, $userId, $accountantId, $managerId) {
-        $donation = new CRUDdonation($date, $userId, $accountantId, $managerId, $this->pdo);
+        $donation = new CRUDdonation($date, $userId, $accountantId, $managerId);
         $donation->insert();
         array_push($this->donations, $donation);
     }
@@ -98,12 +98,20 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$this->id]);
         while ($row = $stmt->fetch()) {
-            $donation = new CRUDdonation($row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id'], $this->pdo);
+            $donation = new CRUDdonation($row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id']);
             array_push($this->donations, $donation); // Add the Donation object to the donations array
             array_push($allUserDonations, $donation); // Add the Donation object to the allUserDonations array
         }
         return $allUserDonations;
     }
+    function readAllUsers() {
+        $sql = "SELECT * FROM users";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        return $users;
+    }
+    
 }
 
 ?>
