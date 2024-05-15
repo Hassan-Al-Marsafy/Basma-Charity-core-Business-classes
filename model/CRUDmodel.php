@@ -75,12 +75,6 @@ class CRUDmodel {
     function readUsers() {
         return $this->operation->readAllUsers();
     }
-    
-
-
-    function readAllUsers() {
-        $this->operation->readUser();
-    }
 
     //observer
     public function attach($observer) {
