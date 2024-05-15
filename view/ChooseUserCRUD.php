@@ -48,7 +48,7 @@
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Users</h2>
                         <a href="../index.php" class='space btn btn-primary pull-right'><span class='glyphicon glyphicon-arrow-left'></span>Back</a>
-                        <a href="../view/CreateUserView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Task</a>
+                        <a href="../view/CreateUserView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New User</a>
                     </div>
                     <?php
                     session_start();
