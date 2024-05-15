@@ -15,13 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if (empty($type_err)) {
         require_once '../model/CRUDmodel.php';
         require_once '../model/db_connect.php';
-        require_once '../strategy/CRUDuser.php';
+        require_once '../strategy/CRUDdonType.php';
         
-        $User = new CRUDmodel();
-        $User->setOperation(new CRUDuser($user_name, $user_type, $name));
+        $DonType = new CRUDmodel();
+        $DonType->setOperation(new CRUDdonType($type));
 
-        if ($donationType->insertDonType()){
-            header("location: ../index.php");
+        if ($DonType->insertOperation()){
+            header("location: ../view/ChooseDonTypeCRUD.php");
         } else {
             echo "Something went wromg. Please try again.";
         }

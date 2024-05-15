@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($donationId_err) && empty($donationTypeId_err) && empty($donationquantity_err)) {
         require_once '../strategy/CRUDdonDetails.php';
-        require_once '../model/donationDetails.php';
+        require_once '../model/CRUDmodel.php';
         
         $Dondetail = new CRUDmodel();
         $Dondetail->setOperation(new CRUDdonDetails($donationId,$donationTypeId,$donationquantity));
 
         if ($Dondetail->insertOperation()) {
-            header("location: ../index.php");
+            header("location: ../view/ChooseDonDetailsCRUD.php");
         } else {
             echo "Something went wrong. Please try again later.";
         }

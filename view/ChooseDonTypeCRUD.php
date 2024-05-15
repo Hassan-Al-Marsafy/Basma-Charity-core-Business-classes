@@ -46,11 +46,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Donations</h2>
+                        <h2 class="pull-left">Donation Types</h2>
                         <a href="../index.php" class='space btn btn-primary pull-right'><span class='glyphicon glyphicon-arrow-left'></span>Back</a>
-                        <a href="../view/InsertDonationView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Donation</a>
+                        <a href="../view/CreateDonTypeView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Type</a>
                     </div>
-                    <?php require_once '../controller/ReadAllDonationsController.php';?>
+                    <?php require_once '../controller/ReadAllDonTypesController.php';?>
                 </div>
             </div>        
         </div>

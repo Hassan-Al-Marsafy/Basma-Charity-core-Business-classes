@@ -82,6 +82,16 @@ class CRUDmodel {
     return $this->operation->readDonations($id);
   }
 
+  function readAllDonTypes()
+  {
+    return $this->operation->readAll();
+  }
+
+  function readAllDonDetails()
+  {
+    return $this->operation->readAll();
+  }
+
   function readAllDonations()
   {
     return $this->operation->readAll();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Donations</title>
+    <title>Donation Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
@@ -46,11 +46,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Donations</h2>
+                        <h2 class="pull-left">Donation Deatils</h2>
                         <a href="../index.php" class='space btn btn-primary pull-right'><span class='glyphicon glyphicon-arrow-left'></span>Back</a>
-                        <a href="../view/InsertDonationView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Donation</a>
+                        <a href="../view/CreateDonDetailView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Donation Detail</a>
                     </div>
-                    <?php require_once '../controller/ReadAllDonationsController.php';?>
+                    <?php require_once '../controller/ReadAllDonDetailsController.php';?>
                 </div>
             </div>        
         </div>

@@ -22,7 +22,7 @@
                         <h2>Insert Donation Type</h2>
                     </div>
                     <p>Please fill this form and submit to insert donation type to the database.</p>
-                    <form action="../controller/InsertDonationType.php" method="POST">
+                    <form action="../controller/CreateDonTypeController.php" method="POST">
                         <div class="form-group">
                             <label>DonationType</label>
                             <input type="type" name="type" class="form-control" maxlength="50" required>

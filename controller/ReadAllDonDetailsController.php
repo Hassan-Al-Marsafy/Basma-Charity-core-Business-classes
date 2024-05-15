@@ -5,19 +5,18 @@ require_once '../model/CRUDmodel.php';
 require_once '../model/db_connect.php';
 require_once '../strategy/CRUDdonDetails.php';
 
-$Donation = new CRUDmodel();  
-$Donation->setOperation(new CRUDdonation($date, $user_id, $accountant_id, $manager_id));
-$result= $Donation->readAllDonations();
+$DonDetails = new CRUDmodel();  
+$DonDetails->setOperation(new CRUDdonDetails($donation_id, $donationType_id, $quantity));
+$result= $DonDetails->readAllDonDetails();
 
 if (!empty($result)) {
     echo "<table class='table table-bordered table-striped'>";
     echo "<thead>";
     echo "<tr>";
     echo "<th>id</th>";
-    echo "<th>donation_id</th>";
-    echo "<th>donationType_id</th>";
-    echo "<th>quantity id</th>";
-    echo "<th>manager id</th>";
+    echo "<th>donation id</th>";
+    echo "<th>Donation Type id</th>";
+    echo "<th>Quantity</th>";
     echo "<th>Action</th>";
     echo "</tr>";
     echo "</thead>";
@@ -29,7 +28,7 @@ if (!empty($result)) {
         echo "<td>" . $don['donationType_id'] . "</td>";
         echo "<td>" . $don['quantity'] . "</td>";
         echo "<td>";
-        echo "<a href='UpdateDonationView.php?id=" . $don['id'] . "' title='Update Donation' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+        echo "<a href='UpidDonationView.php?id=" . $don['id'] . "' title='Upid Donation' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
         echo "<a href='DeleteDonationView.php?id=" . $don['id'] . "' title='Delete Donation' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
         echo "</td>";
         echo "</tr>";
@@ -38,6 +37,6 @@ if (!empty($result)) {
     echo "</table>";
 
 } else {
-    echo "<p class='lead'><em>No Tasks were found.</em></p>";
+    echo "<p class='lead'><em>No Donation Details were found.</em></p>";
 }
 ?>

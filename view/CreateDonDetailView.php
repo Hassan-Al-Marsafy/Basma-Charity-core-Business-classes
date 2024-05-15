@@ -21,7 +21,7 @@
                         <h2>Create Donation Detail</h2>
                     </div>
                     <p>Please fill this form and submit to add user to the database.</p>
-                    <form action="../controller/InsertDonationDetailsController.php" method="post">
+                    <form action="../controller/CreateDonDetailController.php" method="post">
                         <div class="form-group">
                             <label>Donation Id</label>
                             <input type="number" name="donationId" class="form-control" maxlength="50" required>
