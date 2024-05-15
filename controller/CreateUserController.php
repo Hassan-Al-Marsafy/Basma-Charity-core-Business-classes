@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $User->setOperation(new CRUDuser($user_name, $user_type, $name));
         new UserObserver($User);
         if ($User->insertOperation()) {
-            header("location: ../index.php");
+            header("location: ../view/ChooseUserCRUD.php");
         } else {
             $user_name_err = "username already exists.";
             if (!empty($user_name_err)) {

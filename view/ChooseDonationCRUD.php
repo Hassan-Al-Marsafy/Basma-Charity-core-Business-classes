@@ -20,11 +20,17 @@
         .glyphicon-plus{
             margin-right: 5px;
         }
+        .glyphicon-arrow-left{
+            margin-right: 5px;
+        }
         .glyphicon-trash{
             color: red;
         }
         .glyphicon-pencil{
             color: yellow;
+        }
+        .space{
+            margin-right: 10px;
         }
     </style>
     <script type="text/javascript">
@@ -41,7 +47,8 @@
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Donations</h2>
-                        <a href="../view/InsertDonationView.php" class='btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Task</a>
+                        <a href="../index.php" class='space btn btn-primary pull-right'><span class='glyphicon glyphicon-arrow-left'></span>Back</a>
+                        <a href="../view/InsertDonationView.php" class='space btn btn-success pull-right'><span class='glyphicon glyphicon-plus'></span>Add New Task</a>
                     </div>
                     <?php require_once '../controller/ReadAllDonationsController.php';?>
                 </div>
