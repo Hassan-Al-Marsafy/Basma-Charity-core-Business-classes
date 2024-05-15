@@ -51,7 +51,7 @@ class CRUDmodel {
     }
     
     function readAllDonationDetails() {
-        $this->operation->readAllDetails();
+        return $this->operation->readAllDetails();
     
     }
     
@@ -64,10 +64,13 @@ class CRUDmodel {
         $this->operation->addDonation($donationId, $date, $userId, $accountantId, $managerId);
     }
     
-    function readAllDonations() {
-        $this->operation->readDonation();
+    function readAllUserDonations() {
+      return  $this->operation->readDonation();
     }
     
+    function readAllDonations() {
+      return  $this->operation->readAll();
+    }
     
 }
 
