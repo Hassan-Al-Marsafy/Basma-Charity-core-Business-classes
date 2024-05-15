@@ -31,9 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once '../model/CRUDmodel.php';
         require_once '../model/db_connect.php';
         require_once '../strategy/CRUDuser.php';
+        require_once '../observer/UserObserver.php';
         
         $User = new CRUDmodel();
-        $User->setOperation(new CRUDuser($user_name, $user_type, $name, $pdo));
+        $User->setOperation(new CRUDuser($user_name, $user_type, $name));
         new UserObserver($User);
         if ($User->insertOperation()) {
             header("location: ../index.php");

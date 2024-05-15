@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         require_once '../strategy/CRUDuser.php';
         
         $User = new CRUDmodel();
-        $User->setOperation(new CRUDuser($user_name, $user_type, $name, $pdo));
+        $User->setOperation(new CRUDuser($user_name, $user_type, $name));
 
         if ($donationType->insertDonType()){
             header("location: ../index.php");

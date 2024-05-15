@@ -6,7 +6,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     require_once '../strategy/CRUDuser.php';
 
     $User = new CRUDmodel();
-    $User->setOperation(new CRUDuser($user_name, $user_type, $name, $pdo));
+    $User->setOperation(new CRUDuser($user_name, $user_type, $name));
 
     if ($User->deleteOperation($id)) {
         header("location: ../index.php");

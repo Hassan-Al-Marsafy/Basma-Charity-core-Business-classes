@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once '../model/donationDetails.php';
         
         $Dondetail = new CRUDmodel();
-        $Dondetail->setOperation(new CRUDdonDetails($donationId,$donationTypeId,$donationquantity,$pdo));
+        $Dondetail->setOperation(new CRUDdonDetails($donationId,$donationTypeId,$donationquantity));
 
         if ($Dondetail->insertOperation()) {
             header("location: ../index.php");

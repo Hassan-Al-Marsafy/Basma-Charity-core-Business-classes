@@ -9,11 +9,11 @@ class CRUDdonDetails implements CRUDinterface{
     private $quantity;
     private $pdo;
 
-    function __construct($donationId, $donationTypeId, $quantity, $pdo) {
+    function __construct($donationId, $donationTypeId, $quantity) {
         $this->donationId = $donationId;
         $this->donationTypeId = $donationTypeId;
         $this->quantity = $quantity;
-        $this->pdo = $pdo;
+        $this->pdo = Database::getInstance()->getConnection(); // Get the Singleton database connection
     }
 
     // Getters and Setters
