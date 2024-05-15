@@ -5,7 +5,8 @@ require_once ("../strategy/CRUDdonDetails.php");
 require_once ("../strategy/CRUDdonType.php");
 require_once ("../strategy/CRUDdonation.php");
 require_once ("../observer/DonObserver.php");
-
+require_once ("../decorator/EmailDecorator.php");
+require_once ("../decorator/PasswordDecorator.php");
 class CRUDmodel {
     private $observers = array();
     private $operation;
