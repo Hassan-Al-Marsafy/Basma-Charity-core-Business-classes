@@ -66,16 +66,10 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         }
     }
     
-
-
     function update($id, $newUserName, $newType, $newName) {
         $sql = "UPDATE users SET user_name=?, user_type=?, name=? WHERE id=?";
         $stmt= $this->pdo->prepare($sql);
-        $result = $stmt->execute([$newUserName, $newType, $newName, $id]);
-        if (!$result) {
-            return false;
-        }
-        return true;
+        return $stmt->execute([$newUserName, $newType, $newName, $id]);
     }
 
     function read($id) {

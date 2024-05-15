@@ -71,7 +71,7 @@ class CRUDmodel {
 
   function updateUser($id, $newUserName, $newType, $newName)
   {
-    $this->operation->update($id, $newUserName, $newType, $newName);
+    return $this->operation->update($id, $newUserName, $newType, $newName);
   }
 
   function createDonation($donationId, $date, $userId, $accountantId, $managerId)
