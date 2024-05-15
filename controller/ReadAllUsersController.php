@@ -38,6 +38,6 @@ if (!empty($result)) {
     echo "</table>";
 
 } else {
-    echo "<p class='lead'><em>No Tasks were found.</em></p>";
+    echo "<p class='lead'><em>No Users were found.</em></p>";
 }
 ?>

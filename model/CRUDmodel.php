@@ -77,9 +77,9 @@ class CRUDmodel {
     $this->operation->addDonation($donationId, $date, $userId, $accountantId, $managerId);
   }
 
-  function readAllUserDonations()
+  function readAllUserDonations($id)
   {
-    return $this->operation->readDonation();
+    return $this->operation->readDonations($id);
   }
 
   function readAllDonations()

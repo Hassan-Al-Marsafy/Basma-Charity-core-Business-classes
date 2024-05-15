@@ -94,17 +94,13 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         $donation->insert();
         array_push($this->donations, $donation);
     }
-    function readDonations() {
+    function readDonations($id) {
         $allUserDonations = array();
         $sql = "SELECT * FROM donations WHERE user_id=?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$this->id]);
-        while ($row = $stmt->fetch()) {
-            $donation = new CRUDdonation($row['date'], $row['user_id'], $row['accountant_id'], $row['manager_id']);
-            array_push($this->donations, $donation); // Add the Donation object to the donations array
-            array_push($allUserDonations, $donation); // Add the Donation object to the allUserDonations array
-        }
-        return $allUserDonations;
+        $stmt->execute([$id]);
+        $dons = $stmt->fetchAll();
+        return $dons;
     }
     function readAllUsers() {
         $sql = "SELECT * FROM users";

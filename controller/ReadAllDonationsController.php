@@ -1,20 +1,13 @@
 <?php
-//require_once 'Model/ReadClass.php';
+
 $date = $user_id = $accountant_id =$manager_id = "";
 require_once '../model/CRUDmodel.php';
 require_once '../model/db_connect.php';
 require_once '../strategy/CRUDdonation.php';
-//  function readOperation($id) {
-//  $this->operation->read($id);
-//$Donation->setOperation(new CRUDdonation($date, $user_id, $accountant_id, $manager_id, $pdo));
-//if($Donation->insertOperation()){
 
 $Donation = new CRUDmodel();  
 $Donation->setOperation(new CRUDdonation($date, $user_id, $accountant_id, $manager_id));
 $result= $Donation->readAllDonations();
-
-//$read = new ReadClass();
-//$result = $read->readAll();
 
 if (!empty($result)) {
     echo "<table class='table table-bordered table-striped'>";
