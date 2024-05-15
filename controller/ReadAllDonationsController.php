@@ -39,7 +39,7 @@ if (!empty($result)) {
         echo "<td>";
         echo "<a href='InsertDonationController?id=" . $don['id'] . "' title='View Task' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
         echo "<a href='View/update.php?id=" . $don['id'] . "' title='Update Task' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-        echo "<a href='View/delete.php?id=" . $don['id'] . "' title='Delete Task' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+        echo "<a href='DeleteDonationView.php?id=" . $don['id'] . "' title='Delete Task' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
         echo "</td>";
         echo "</tr>";
     }

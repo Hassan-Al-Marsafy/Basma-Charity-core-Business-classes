@@ -93,10 +93,7 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
         $sql = "DELETE FROM donations WHERE id=?";
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute([$id]);
-        if (!$result) {
-            return false;
-        }
-        return true;
+        return $result;
     }
     function readAllDetails() {
         $allDonationDetails = array();

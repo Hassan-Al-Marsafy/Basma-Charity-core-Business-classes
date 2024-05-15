@@ -41,8 +41,7 @@ class CRUDmodel {
     }
     
     function deleteOperation($id) {
-        $this->operation->delete($id);
-        
+        return $this->operation->delete($id);  
     }
     
 
