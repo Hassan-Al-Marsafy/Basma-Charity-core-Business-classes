@@ -8,9 +8,8 @@ require_once ("../observer/DonObserver.php");
 
 class CRUDmodel {
     private $observers = array();
-
     private $operation;
-    private $observers = array();
+    
     public function getOperation(){
         return $this->operation;
     }
