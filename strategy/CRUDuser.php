@@ -104,6 +104,14 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         }
         return $allUserDonations;
     }
+    function readAllUsers() {
+        $sql = "SELECT * FROM users";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        return $users;
+    }
+    
 }
 
 ?>

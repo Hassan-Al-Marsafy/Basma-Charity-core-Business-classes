@@ -72,6 +72,11 @@ class CRUDmodel {
     function readAllDonations() {
         $this->operation->readDonation();
     }
+    function readUsers() {
+        return $this->operation->readAllUsers();
+    }
+    
+
 
     function readAllUsers() {
         $this->operation->readUser();
@@ -89,4 +94,5 @@ class CRUDmodel {
     }
 
 }
+
 ?>
