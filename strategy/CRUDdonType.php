@@ -36,7 +36,8 @@ class CRUDdonType implements CRUDinterface{
         $sql = "SELECT * FROM donation_types WHERE id=?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch();
+        $row = $stmt->fetch();
+        return $row;
     }
 
     function delete($id) {
