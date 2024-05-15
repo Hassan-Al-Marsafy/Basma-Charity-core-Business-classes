@@ -3,6 +3,9 @@ require_once ("CRUDinterface.php");
 require_once ("../AbstractID.php");
 require_once ("../model/db_connect.php");
 require_once ("CRUDdonDetails.php");
+require_once ("../observer/Observer.php");
+require_once ("../observer/DonObserver.php");
+
 class CRUDdonation extends AbstractID implements CRUDinterface{
     private $date;
     private $userId;
@@ -16,6 +19,7 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
         $this->accountantId = $accountantId;
         $this->managerId = $managerId;
         $this->pdo = $pdo;
+
     }
 
     // Getters and Setters
@@ -103,6 +107,7 @@ class CRUDdonation extends AbstractID implements CRUDinterface{
         $donationDetail->insert();
         array_push($this->donationDetails, $donationDetail);
     }
+
 }
 
 

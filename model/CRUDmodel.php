@@ -1,11 +1,14 @@
 <?php
 require_once ("db_connect.php");
-require_once ("..\\strategy\\CRUDuser.php");
-require_once ("..\\strategy\\CRUDdonDetails.php");
-require_once ("..\\strategy\\CRUDdonType.php");
-require_once ("..\\strategy\\CRUDdonation.php");
+require_once ("../strategy/CRUDuser.php");
+require_once ("../strategy/CRUDdonDetails.php");
+require_once ("../strategy/CRUDdonType.php");
+require_once ("../strategy/CRUDdonation.php");
+require_once ("../observer/DonObserver.php");
 
 class CRUDmodel {
+    private $observers = array();
+
     private $operation;
     public function getOperation(){
         return $this->operation;
@@ -18,6 +21,8 @@ class CRUDmodel {
     
     function insertOperation() {
         $x = $this->operation->insert();
+        $this->notifyAllObservers();
+
         return $x;
     }
 
@@ -67,8 +72,19 @@ class CRUDmodel {
     function readAllDonations() {
         $this->operation->readDonation();
     }
-    
-    
-}
 
+
+
+        //observer
+        public function attach($observer) {
+            array_push($this->observers, $observer);
+        }
+     
+        public function notifyAllObservers() {
+            foreach ($this->observers as $obs){
+                $obs->update();
+            }
+        }
+
+}
 ?>
