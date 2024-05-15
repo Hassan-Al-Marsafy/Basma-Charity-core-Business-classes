@@ -42,7 +42,7 @@
                             <input type="text" name="type" class="form-control" required>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="../index.php" class="btn btn-default">Cancel</a>
+                        <a href="ChooseUserCRUD.php" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
             </div>

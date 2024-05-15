@@ -40,6 +40,9 @@ class CRUDuser extends AbstractID implements CRUDinterface{
     public function setName($name) {
         $this->name = $name;
     }
+    public function getPdo() {
+        return $this->pdo;
+    }    
 
     public function getDonations() {
         return $this->donations;
@@ -47,17 +50,22 @@ class CRUDuser extends AbstractID implements CRUDinterface{
 
     // Database manipulation functions
     function insert() {
-        $x=true;
         try{
             $sql = "INSERT INTO users (user_name, user_type, name) VALUES (?, ?, ?)";
             $stmt= $this->pdo->prepare($sql);
-            $stmt->execute([$this->Username, $this->type,$this->name]);
+            $stmt->execute([$this->Username, $this->type, $this->name]);
+    
+            // Get the ID of the newly inserted user
+            $id = $this->pdo->lastInsertId();
+            return $id;
         }
         catch(PDOException $e){
-            $x=false;
+            // You might want to handle this exception differently
+            // For example, you could re-throw the exception, or log the error message somewhere
+            return false;
         }
-        return $x;
     }
+    
 
 
     function update($id, $newUserName, $newType, $newName) {
@@ -113,5 +121,4 @@ class CRUDuser extends AbstractID implements CRUDinterface{
     }
     
 }
-
 ?>
