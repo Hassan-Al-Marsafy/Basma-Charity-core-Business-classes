@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($input_user_id)) {
         $user_id_err = "Please enter a user_id.";
     } else {
-        $user_name = $input_user_id;
+        $user_id = $input_user_id;
     }
 
     $input_accountant_id = trim($_POST["accountant_id"]);

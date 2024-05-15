@@ -25,19 +25,19 @@
                     <form action="../controller/InsertDonationController.php" method="post">
                         <div class="form-group">
                             <label>Date</label>
-                            <input type="text" name="date" class="form-control" maxlength="50" required>
+                            <input type="date" name="date" class="form-control" maxlength="50" required>
                         </div>
                         <div class="form-group">
                             <label>User id</label>
-                            <input type="text" name="user_id" class="form-control" maxlength="50" required>
+                            <input type="number" name="user_id" class="form-control" maxlength="50" required>
                         </div>
                         <div class="form-group">
                             <label>accountant id</label>
-                            <input type="text" name="accountant_id" class="form-control" required>
+                            <input type="number" name="accountant_id" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Manager id</label>
-                            <input type="text" name="manager_id" class="form-control" required>
+                            <input type="number" name="manager_id" class="form-control" required>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="../index.php" class="btn btn-default">Cancel</a>
