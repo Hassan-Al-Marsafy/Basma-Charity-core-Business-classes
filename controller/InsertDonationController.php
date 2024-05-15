@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once '../model/db_connect.php';
         require_once '../strategy/CRUDdonation.php';
         $Donation = new CRUDmodel();
-        $Donation->setOperation(new CRUDdonation($date, $user_id, $accountant_id, $manager_id, $pdo));
+        $Donation->setOperation(new CRUDdonation($date, $user_id, $accountant_id, $manager_id));
         if($Donation->insertOperation()){
 
-          header("location: ../index.php");
+          header("location: ../view/ChooseDonationCRUD.php");
         }
         else {
           echo "Something Went Wrong";
