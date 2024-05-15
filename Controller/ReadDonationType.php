@@ -1,5 +1,5 @@
 <?php
-require_once '../model/db_connect.php'; // Assuming this file contains the database connection
+require_once '../model/db_connect.php'; 
 require_once '../strategy/CRUDdonType.php';
 require_once '../model/donationType.php';
 
@@ -18,7 +18,6 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             $row = $donationType->readDonType($id);
 
             if (!empty($row)) {
-                // Pass the data to the view
                 header("Location: ../view/OutputReadDonationTypeView.php?id=" . urlencode($row["id"]) . "&type=" . urlencode($row["D_type_name"]));
                 exit();
             } else {

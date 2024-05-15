@@ -21,12 +21,9 @@ class DonationType {
     }
 
     function readDonType($id) {
-<<<<<<< Updated upstream
-        $row = $this->donType->read($id);
-        return $row;
-=======
+
         return $this->donType->read($id);
->>>>>>> Stashed changes
+
     }
 
     function deleteDonType($id) {

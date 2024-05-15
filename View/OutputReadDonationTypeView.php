@@ -20,7 +20,7 @@
                         <h1>View Donation Type</h1>
                     </div>
                     <?php
-                    // Check if the necessary GET parameters are set
+
                     if (isset($_GET['id']) && isset($_GET['type'])) {
                         $id = htmlspecialchars($_GET['id']);
                         $type = htmlspecialchars($_GET['type']);
