@@ -52,22 +52,20 @@ class CRUDmodel {
   }
 
 
-  function updateDonation($id, $newDate, $newUserId, $newAccountantId, $newManagerId)
-  {
-    return $this->operation->update($id, $newDate, $newUserId, $newAccountantId, $newManagerId);
-  }
-  function addDonationDetail($donationDetailId, $donationTypeId, $quantity)
-  {
-    $this->operation->addDetail($donationDetailId, $donationTypeId, $quantity);
-
-  }
-
-  function readAllDonationDetails()
-  {
-    return $this->operation->readAllDetails();
-
-  }
-
+    function updateDonation($id, $newDate, $newUserId, $newAccountantId, $newManagerId) {
+        $this->operation->update($id, $newDate, $newUserId, $newAccountantId, $newManagerId);
+    
+    }
+    function addDonationDetail($donationTypeId, $quantity) {
+        $this->operation->addDetail($donationTypeId, $quantity);
+    
+    }
+    
+    function readAllDonationDetails() {
+        return $this->operation->readAllDetails();
+    
+    }
+    
 
   function updateUser($id, $newUserName, $newType, $newName)
   {

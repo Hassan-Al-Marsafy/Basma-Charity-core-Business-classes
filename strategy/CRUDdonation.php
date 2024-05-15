@@ -100,33 +100,29 @@ class CRUDdonation extends AbstractID implements CRUDinterface
     $donations = $stmt->fetchAll();
     return $donations;
   }
-  function delete($id)
-  {
-    $sql = "DELETE FROM donations WHERE id=?";
-    $stmt = $this->pdo->prepare($sql);
-    $result = $stmt->execute([$id]);
-
-    return $result;
-  }
-  function readAllDetails()
-  {
-    $allDonationDetails = array();
-    $sql = "SELECT * FROM donation_details WHERE donation_id=?";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute([$this->id]);
-    while ($row = $stmt->fetch()) {
-      $donationDetail = new CRUDdonDetails($row['donation_id'], $row['donationType_id'], $row['quantity']);
-      array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
-      array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
+    function delete($id) {
+        $sql = "DELETE FROM donations WHERE id=?";
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute([$id]);
+        return $result;
     }
-    return $allDonationDetails;
-  }
-  function addDetail($donationDetailId, $donationTypeId, $quantity)
-  {
-    $donationDetail = new CRUDdonDetails($this->id, $donationTypeId, $quantity);
-    $donationDetail->insert();
-    array_push($this->donationDetails, $donationDetail);
-  }
+    function readAllDetails() {
+        $allDonationDetails = array();
+        $sql = "SELECT * FROM donation_details WHERE donation_id=?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$this->id]);
+        while ($row = $stmt->fetch()) {
+            $donationDetail = new CRUDdonDetails($row['donation_id'], $row['donationType_id'], $row['quantity']);
+            array_push($this->donationDetails, $donationDetail); // Add the DonationDetails object to the donationDetails array
+            array_push($allDonationDetails, $row); // Add the donation detail data to the allDonationDetails array
+        }
+        return $allDonationDetails;
+    }
+    function addDetail($donationTypeId, $quantity) {
+        $donationDetail = new CRUDdonDetails($this->id, $donationTypeId, $quantity);
+        $donationDetail->insert();
+        array_push($this->donationDetails, $donationDetail);
+    }
 
 }
 

@@ -89,7 +89,7 @@ class CRUDuser extends AbstractID implements CRUDinterface{
         }
         return true;
     }
-    function addDonation($donationId, $date, $userId, $accountantId, $managerId) {
+    function addDonation($date, $userId, $accountantId, $managerId) {
         $donation = new CRUDdonation($date, $userId, $accountantId, $managerId);
         $donation->insert();
         array_push($this->donations, $donation);
