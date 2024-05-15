@@ -45,6 +45,15 @@ class CRUDdonType implements CRUDinterface{
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
+
+   
+    function readAllDonTypes() {
+        $sql = "SELECT * FROM donation_types";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 }
 
 
