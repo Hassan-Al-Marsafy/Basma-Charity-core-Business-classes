@@ -10,6 +10,7 @@ class CRUDmodel {
     private $observers = array();
 
     private $operation;
+    private $observers = array();
     public function getOperation(){
         return $this->operation;
     }
@@ -73,18 +74,20 @@ class CRUDmodel {
         $this->operation->readDonation();
     }
 
+    function readAllUsers() {
+        $this->operation->readUser();
+    }
 
-
-        //observer
-        public function attach($observer) {
-            array_push($this->observers, $observer);
+    //observer
+    public function attach($observer) {
+        array_push($this->observers, $observer);
+    }
+    
+    public function notifyAllObservers() {
+        foreach ($this->observers as $obs){
+            $obs->update();
         }
-     
-        public function notifyAllObservers() {
-            foreach ($this->observers as $obs){
-                $obs->update();
-            }
-        }
+    }
 
 }
 ?>

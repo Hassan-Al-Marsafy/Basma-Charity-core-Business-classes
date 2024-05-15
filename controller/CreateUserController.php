@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once '../model/CRUDmodel.php';
         require_once '../model/db_connect.php';
         require_once '../strategy/CRUDuser.php';
-        require_once '../observer/UserObserver.php';
+        
         $User = new CRUDmodel();
         $User->setOperation(new CRUDuser($user_name, $user_type, $name, $pdo));
         new UserObserver($User);
@@ -39,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("location: ../index.php");
         } else {
             $user_name_err = "username already exists.";
+            if (!empty($user_name_err)) {
+                $_SESSION['message'] = $user_name_err;
+            }
             header("location: ../view/CreateUserview.php");
         }
     }

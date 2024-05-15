@@ -57,7 +57,9 @@
                     }
                     ?>
                     <button class="btn btn-primary" onclick="window.location.href='view/ChooseUserCRUD.php'">User</button>
-                    <button class="btn btn-success" onclick="window.location.href='view/CreateDonationview.php'">Donation</button>
+                    <button class="btn btn-success" onclick="window.location.href='view/ChooseDonationCRUD.php'">Donation</button>
+                    <button class="btn btn-info" onclick="window.location.href='view/ChooseDonTypeCRUD.php'">Donation Type</button>
+                    <button class="btn btn-Secondry" onclick="window.location.href='view/ChooseDonDetailsCRUD.php'">Donation Details</button>
                 </div>
             </div>
         </div>
